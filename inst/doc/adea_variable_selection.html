@@ -13,7 +13,7 @@
 <meta name="author" content="Fernando Fernandez-Palacin" />
 <meta name="author" content="Manuel Munoz-Marquez" />
 
-<meta name="date" content="2021-09-03" />
+<meta name="date" content="2021-12-13" />
 
 <title>Variable selection in DEA with adea method</title>
 
@@ -350,7 +350,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">Variable selection in DEA with adea method</h1>
 <h4 class="author">Fernando Fernandez-Palacin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
 <h4 class="author">Manuel Munoz-Marquez<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></h4>
-<h4 class="date">2021-09-03</h4>
+<h4 class="date">2021-12-13</h4>
 
 
 
@@ -376,18 +376,20 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>input &lt;-<span class="st"> </span>tokyo_libraries[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>output &lt;-<span class="st"> </span>tokyo_libraries[, <span class="dv">5</span><span class="op">:</span><span class="dv">6</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">adea_hierarchical</span>(input, output)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt;        Load #Efficients #Variables #Inputs #Outputs</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; 6 0.4554670           6          6       4        2</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; 5 0.9901640           6          5       3        2</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; 4 0.9031744           4          4       3        1</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt; 3 0.7550366           2          3       2        1</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; 2 1.0000000           1          2       1        1</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt;                                        Inputs              Outputs</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; 6 Area.I1, Books.I2, Staff.I3, Populations.I4 Regist.O1, Borrow.O2</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; 5          Books.I2, Staff.I3, Populations.I4 Regist.O1, Borrow.O2</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; 4          Books.I2, Staff.I3, Populations.I4            Borrow.O2</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; 3                    Books.I2, Populations.I4            Borrow.O2</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="co">#&gt; 2                                    Books.I2            Borrow.O2</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt;       Load #Efficients #Variables #Inputs #Outputs</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; 6 inoutput           6          6       4        2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; 5 inoutput           6          5       3        2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; 4 inoutput           4          4       3        1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt; 3 inoutput           2          3       2        1</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; 2 inoutput           1          2       1        1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; 1 inoutput           0          1       0        0</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt;                                        Inputs              Outputs</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; 6 Area.I1, Books.I2, Staff.I3, Populations.I4 Regist.O1, Borrow.O2</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; 5          Books.I2, Staff.I3, Populations.I4 Regist.O1, Borrow.O2</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; 4          Books.I2, Staff.I3, Populations.I4            Borrow.O2</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="co">#&gt; 3                    Books.I2, Populations.I4            Borrow.O2</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a><span class="co">#&gt; 2                                    Books.I2            Borrow.O2</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a><span class="co">#&gt; 1</span></span></code></pre></div>
 <p>The load of the first model is 0.455467 which is under the minimum significance level, so <code>Area.I1</code> can be removed from the model.</p>
 <p>When a variable is removed what one can expect is that the load of all variables raise, but after the second model this not happen. So third model is poorer than second and there is no statistical reason to select it.</p>
 <p>To avoid that a second step wise selection variable is provided, the new call is</p>
