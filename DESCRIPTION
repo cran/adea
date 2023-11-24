@@ -2,10 +2,11 @@ Package: adea
 Type: Package
 Depends: methods, R (>= 3.5.0), rmarkdown, ROI.plugin.glpk,
         ROI.plugin.lpsolve, ROI.plugin.symphony
-Imports: combinat, graphics, knitr, lpSolveAPI, ROI, slam
+Imports: combinat, graphics, knitr, lpSolveAPI, parallel, parallelly,
+        ROI, slam
 VignetteBuilder: knitr
-Version: 1.4.5
-Date: 2023-11-14
+Version: 1.5.1
+Date: 2023-11-27
 Encoding: UTF-8
 ByteCompile: true
 Title: Alternate DEA Package
@@ -20,10 +21,10 @@ Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 NeedsCompilation: no
-Packaged: 2023-11-14 12:34:44 UTC; mmarquez
+Packaged: 2023-11-24 15:17:09 UTC; mmarquez
 Author: Fernando Fernandez-Palacin [aut]
     (<https://orcid.org/0000-0002-3525-2924>),
   Manuel Munoz-Marquez [aut, cre]
     (<https://orcid.org/0000-0003-4157-8784>)
 Repository: CRAN
-Date/Publication: 2023-11-15 09:20:06 UTC
+Date/Publication: 2023-11-24 16:00:02 UTC
