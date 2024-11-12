@@ -1,3 +1,6 @@
+Version 1.5.2
+2024-11-06
+ * Improvements in parallel computations
 Version 1.5.1
 2023-11-27
  * Now adea_load_leverage use parallel to speed up computations

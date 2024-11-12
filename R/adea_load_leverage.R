@@ -97,14 +97,19 @@ adea_load_leverage <- function(input, output, orientation = c('input', 'output')
     dmu.indexs <- matrix(ncol = 0, nrow = ndel)
 
     ## Create a cluster
-    cl <- makeClusterPSOCK(availableCores())
+    supportsMulticore <- parallelly::supportsMulticore()
+    if (supportsMulticore) cl <- parallel::makeCluster(availableCores(omit = 1), type = "FORK")
 
     ## Main loop in size
     for(k in 1:ndel) {
         ## Compute combinations
         .combn <- combn(1:nrow(input), k)
         ## Compute loads
-        .loads <- parApply(cl = cl, .combn, MARGIN = 2, FUN = adea_load_leverage_i, input = input, output = output, orientation = orientation, load.orientation = load.orientation, solver = solver)
+        if (supportsMulticore) {
+            .loads <- parApply(cl = cl, .combn, MARGIN = 2, FUN = adea_load_leverage_i, input = input, output = output, orientation = orientation, load.orientation = load.orientation, solver = solver)
+       } else {
+           .loads <- apply(.combn, MARGIN = 2, FUN = adea_load_leverage_i, input = input, output = output, orientation = orientation, load.orientation = load.orientation, solver = solver)
+        }
         ## Compute differences in loads
         .loads.diff <- abs(iload.level - .loads)
         ## Compute index
@@ -120,8 +125,8 @@ adea_load_leverage <- function(input, output, orientation = c('input', 'output')
     }
 
     ## Stop the cluster
-    stopCluster(cl)
-    
+    if (supportsMulticore) stopCluster(cl)
+
     ## Return results
     if (length(loads.diff) > 1) {
         index <- sort(loads.diff, decreasing = TRUE, index.return = TRUE)
@@ -129,12 +134,10 @@ adea_load_leverage <- function(input, output, orientation = c('input', 'output')
         if (nmax > 1 && nmax < length(index)) index <- index[1:nmax]
         loads <- loads[index]
         loads.diff <- loads.diff[index]
-        dmu.indexs <- dmu.indexs[, index]
-    } else {
-        if (length(loads.diff) == 0) {
-            dmu.indexs <- NULL
-        }
+        dmu.indexs <- dmu.indexs[, index, drop = FALSE]
     }
+    dmu.indexs <- t(dmu.indexs)
+    if (length(loads.diff) == 0) dmu.indexs <- numeric(0)
     
     ## Build return list
     result <- list(loads = loads, loads.diff = loads.diff, dmu.indexs = dmu.indexs)
@@ -146,8 +149,8 @@ adea_load_leverage <- function(input, output, orientation = c('input', 'output')
 ## eindex = Set of DMU to exclude
 adea_load_leverage_i <- function(eindex, input, output, orientation, load.orientation, solver)
 {
-    inputi <- input[-eindex,]
-    outputi <- output[-eindex,]
+    inputi <- input[-eindex,, drop = FALSE]
+    outputi <- output[-eindex,, drop = FALSE]
     .adea <- roi_solve_adea(inputi, outputi, orientation = orientation, load.orientation = load.orientation, solver = solver)
     adea_loads(inputi, outputi, ux = .adea$ux, vy = .adea$vy, load.orientation = load.orientation)$load
 }

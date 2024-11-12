@@ -11,6 +11,7 @@ test_that('Test DEA: Error detections', {
     output = cardealers4[, c('CarsSold', 'WorkOrders')]
     input[1, 1] <- NA
     sol <- try(dea(input, output), silent = TRUE)
+    expect_s3_class(sol, 'try-error')
     ## NAs in output
     input = cardealers4[, c('Employees', 'Depreciation')]
     output = cardealers4[, c('CarsSold', 'WorkOrders')]

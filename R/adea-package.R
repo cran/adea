@@ -1,7 +1,7 @@
+"_PACKAGE"
 #' Data Envelopment Analysis: Variable Selection, Constrained ADEA and Leverage Units
 #'
 #' @aliases adea-package
-#' @docType package
 #' @name adea-package
 #'
 #' @description
@@ -9,9 +9,9 @@
 #'
 #' Package: adea
 #'
-#' Version: 1.5.1
+#' Version: 1.5.2
 #'
-#' Date: 2023-11-27
+#' Date: 2024-11-06
 #'
 #' License: GPL (>= 3)
 #' }
